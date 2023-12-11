@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Chicago Seniors in Food Deserts & Grocery Store Locations</title>
+    <title>Chicago Seniors in Food Deserts</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.0/dist/leaflet.css" />
@@ -118,18 +118,18 @@
 
 <body>
     <!-- Add the title and about box -->
-    <div id="map-title">Chicago Seniors in Food Deserts & Grocery Store Locations</div>
+    <div id="map-title">Chicago Senior Food Deserts</div>
     <div id="about-box">
         <h2>About</h2>
-        <p>This interactive map displays the number of seniors living in a food desert for Chicago census tracts along with the locations of grocery stores. Hover over a county to see the number of seniors in a food desert, click to zoom, and explore the distribution of grocery stores.</p>
+        <p>This interactive map displays the number of senuiors 65+ years old living in a food desert for Chicago census tracts along with the locations of grocery stores. Hover over a county to see the seniors living with low food access, click to zoom, and explore the distribution of discount stores.</p>
     </div>
 
     <div id="map"></div>
 
     <script>
         var mymap = L.map('map', {
-            center: [41.8781, -87.6298],
-            zoom: 7,
+            center: [41.8781, -87.6298], // Chicago coordinates
+            zoom: 11,
             maxZoom: 18,
             minZoom: 3,
             detectRetina: true
@@ -137,11 +137,11 @@
 
         // Add OpenStreetMap tile layer to map element
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Poverty Estimate data &copy; <a href="https://www.ers.usda.gov/">U.S. Deparment of Agriculture</a> | Jason Wright'
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Food Desert data &copy; <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/">U.S. Deparment of Agriculture</a> | Jason Wright'
         }).addTo(mymap);
 
+        var seniorsCensus = null;
         var groceryStores = null;
-        var discountStores = null;
 
         var info = L.control();
         info.onAdd = function (map) {
@@ -151,51 +151,53 @@
         };
 
         info.update = function (props) {
-            this._div.innerHTML = '<h4>Chicago Seniors with Low Food Access</h4>' + (props ?
-                '<b>' + props.store_name + '</b><br />' +
-                'Seniors in Food Desert: ' + props.laseniors1 + ' people'
+            this._div.innerHTML = '<h4>Chicago Food Deserts</h4>' + (props ?
+                '<b>' + '</b><br />' +
+                'Low food access: ' + props.laseniors1 + ' people'
                 : 'Hover over a county');
         };
 
         info.addTo(mymap);
 
         function highlightFeature(e) {
-    var layer = e.target;
-    layer.setStyle({
-        weight: 5,
-        color: 'red',
-        fillOpacity: 0.7
-    });
-    info.update(layer.feature.properties);
-}
+            var layer = e.target;
+            layer.setStyle({
+                weight: 5,
+                color: 'red',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+            info.update(layer.feature.properties);
+        }
 
-function resetHighlight(e) {
-    var layer=e.target;
-    groceryStores.resetStyle(e.target);
-    info.update();
-}
+        function resetHighlight(e) {
+            seniorsCensus.resetStyle(e.target);
+            info.update();
+        }
 
-function zoomToFeature(e) {
-    mymap.fitBounds(e.target.getBounds());
-}
+        function zoomToFeature(e) {
+            mymap.fitBounds(e.target.getBounds());
+        }
 
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-    layer.bindPopup('County: ' + feature.properties.store_name +
-        '<br>Seniors in Food Desert: ' + feature.properties.laseniors1 + ' people');
-}
-
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+            layer.bindPopup('<br>Number of Seniors living in a food desert: ' + feature.properties.laseniors1 + ' people');
+        }
 
         function getColor(d) {
-            return d > 100? '#FF5733' :
-                d > 80 ? '#FF8C66' :
-                    d > 60 ? '#FFB399' :
-                        d > 40 ? '#FFD9CC' :
-                            '#FFE6E6';
+            var colors = chroma.scale(['#eff3ff', '#08519c']).colors(5);
+            return d > 40 ? colors[4] :
+                d > 30 ? colors[3] :
+                    d > 20 ? colors[2] :
+                        d > 10 ? colors[1] :
+                            colors[0];
         }
 
         function style(feature) {
@@ -203,18 +205,18 @@ function onEachFeature(feature, layer) {
                 fillColor: getColor(feature.properties.laseniors1),
                 weight: 2,
                 opacity: 1,
-                color: 'black',
+                color: 'red',
                 dashArray: '3',
-                fillOpacity: 0.5
+                fillOpacity: 0.7
             };
         }
 
-        countiesPoverty = L.geoJson.ajax("assets/Chicagoshapefile.geojson", {
+        seniorsCensus = L.geoJson.ajax("assets/Chicagoshapefile.geojson", {
             style: style,
             onEachFeature: onEachFeature
         }).addTo(mymap);
 
-        discountStores = L.geoJson.ajax("assets/storepoints.geojson", {
+        groceryStores = L.geoJson.ajax("assets/storepoints.geojson", {
             pointToLayer: function (feature, latlng) {
                 var id = 0;
                 if (feature.properties.store_type == "Type1") { id = 0; }
@@ -229,7 +231,7 @@ function onEachFeature(feature, layer) {
                 });
             },
             onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.store_name);
+                layer.bindPopup(feature.properties["STORE NAME"]);
             }
         }).addTo(mymap);
 
@@ -239,11 +241,13 @@ function onEachFeature(feature, layer) {
 
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'legend');
-            var labels = ['<h4>Seniors</h4>'];
-            var grades = [0, 40, 60, 80, 100];
-            var colors = ['#FFD700', '#FF6347', '#FF4500', '#B30000', '#8C0000'];
+            var labels = [];
+            var grades = [0, 10, 20, 30, 40, 50];
+            var colors = chroma.scale(['#eff3ff', '#08519c']).colors(grades.length - 1);
 
-            for (var i = 0; i < grades.length; i++) {
+            div.innerHTML = '<h4>Seniors in a Food Desert</h4>';
+
+            for (var i = 0; i < grades.length - 1; i++) {
                 labels.push(
                     '<div><i style="background:' + colors[i] + '"></i> ' +
                     grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] : '+') +
@@ -251,7 +255,7 @@ function onEachFeature(feature, layer) {
                 );
             }
 
-            div.innerHTML = labels.join('');
+            div.innerHTML += labels.join('');
             return div;
         };
 
