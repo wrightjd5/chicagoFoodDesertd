@@ -1,6 +1,6 @@
-# Washington Poverty and Discount Stores Map
+# Chicago Seniors in Food Deserts Map
 
-An interactive map showcasing poverty data for children in Washington counties from 2021 along with the locations of discount and charity stores.
+An interactive map illustrating the number of seniors per census tract in Chicago living in food deserts. The map also displays the locations of grocery stores in the region.
 
 ## Table of Contents
 - [About](#about)
@@ -11,25 +11,25 @@ An interactive map showcasing poverty data for children in Washington counties f
 
 ## About
 
-This interactive map visualizes the number of children ages 0-17 in poverty per county in Washington, overlaying the distribution of discount and charity stores. The map provides a comprehensive view of poverty statistics and store locations to aid in understanding the socio-economic landscape.
+This interactive map provides insights into the distribution of seniors living in food deserts across different census tracts in Chicago. Additionally, it highlights the locations of grocery stores to facilitate a better understanding of the accessibility of food resources for seniors in the city.
 
 ## How to Use
 
-1. **Hover over a County:** Move your cursor over a county to view the number of people in poverty.
+1. **Hover over a Census Tract:** Move your cursor over a census tract to view the number of seniors living in a food desert.
 
-2. **Click on a County:** Click on a county to zoom in and explore more detailed information.
+2. **Click on a Census Tract:** Click on a census tract to zoom in and explore more detailed information.
 
-3. **Discount and Charity Stores:** Icons on the map represent the locations of different types of stores. Click on the icons to view store names.
+3. **Grocery Store Information:** Icons on the map represent the locations of grocery stores. Click on the icons to view the names of the grocery stores.
 
 ## Data Conversion Process
 
-A shapefile representing counties in Washington State was found on [IGISMap](https://www.igismap.com/download-washington-state-gis-maps-boundary-counties-rail-highway/) and then converted to GeoJSON using [geojson.com](http://geojson.com). Data representing the number of people aged 0-17 experiencing poverty per county in Washington was found from the [U.S. Department of Agriculture - Economic Research Service](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/) and was joined with the Washington counties GeoJSON file using [geojson.com](http://geojson.com). The point data representing the number of discount and charity stores was found as a shapefile on [IGISMap](https://map.igismap.com/gis-data/129836/united%20states-washington/discount_stores_and_charity_point) and was then converted to GeoJSON format using [geojson.com](http://geojson.com).
+The shapefile containing the Chicago census tract boundaries and the number of seniors living in food deserts was obtained and converted to GeoJSON format. Grocery store locations were extracted from a GeoJSON file containing the necessary information about the stores.
 
 ## Data Sources
 
-- **Poverty Data:** [U.S. Department of Agriculture - Economic Resesarch Service](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data/)
-- **County boundaries:** [IGISMap](https://www.igismap.com/download-washington-state-gis-maps-boundary-counties-rail-highway/)
-- **Discount Store Data:** [IGISMap](https://map.igismap.com/gis-data/129836/united%20states-washington/discount_stores_and_charity_point)
+- **Seniors in Food Deserts Data:** [Your Data Source]
+- **Census Tract Boundaries:** [Your Data Source]
+- **Grocery Store Data:** [Your Data Source]
 
 ## Contributing
 
@@ -43,4 +43,4 @@ If you'd like to contribute to this project, please follow these steps:
 
 ## Contact
 
-For any inquiries or feedback, please contact [Jason Wright](mailto:wrightjd5@appstate.edu).
+For any inquiries or feedback, please contact [Your Contact Name](mailto:your.email@example.com).
