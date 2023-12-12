@@ -121,7 +121,7 @@
     <div id="map-title">Chicago Senior Food Deserts</div>
     <div id="about-box">
         <h2>About</h2>
-        <p>This interactive map displays the number of senuiors 65+ years old living in a food desert for Chicago census tracts along with the locations of grocery stores. Hover over a county to see the seniors living with low food access, click to zoom, and explore the distribution of discount stores.</p>
+        <p>This interactive map displays the number of seniors 65+ years old living in a food desert for Chicago census tracts along with the locations of grocery stores. Hover over a county to see the seniors living with low food access, click to zoom, and explore the distribution of discount stores.</p>
     </div>
 
     <div id="map"></div>
@@ -154,7 +154,7 @@
             this._div.innerHTML = '<h4>Chicago Food Deserts</h4>' + (props ?
                 '<b>' + '</b><br />' +
                 'Low food access: ' + props.laseniors1 + ' people'
-                : 'Hover over a county');
+                : 'Hover over a census tract');
         };
 
         info.addTo(mymap);
@@ -188,15 +188,15 @@
                 mouseout: resetHighlight,
                 click: zoomToFeature
             });
-            layer.bindPopup('<br>Number of Seniors living in a food desert: ' + feature.properties.laseniors1 + ' people');
+            layer.bindPopup('<br># of seniors: ' + feature.properties.laseniors1 + ' people');
         }
 
         function getColor(d) {
-            var colors = chroma.scale(['#eff3ff', '#08519c']).colors(5);
-            return d > 40 ? colors[4] :
-                d > 30 ? colors[3] :
-                    d > 20 ? colors[2] :
-                        d > 10 ? colors[1] :
+            var colors = chroma.scale(['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15']).colors(5);
+            return d > 100 ? colors[4] :
+                d > 40 ? colors[3] :
+                    d > 10 ? colors[2] :
+                        d > 2 ? colors[1] :
                             colors[0];
         }
 
@@ -205,7 +205,7 @@
                 fillColor: getColor(feature.properties.laseniors1),
                 weight: 2,
                 opacity: 1,
-                color: 'red',
+                color: 'black',
                 dashArray: '3',
                 fillOpacity: 0.7
             };
@@ -242,10 +242,10 @@
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'legend');
             var labels = [];
-            var grades = [0, 10, 20, 30, 40, 50];
-            var colors = chroma.scale(['#eff3ff', '#08519c']).colors(grades.length - 1);
+            var grades = [0, 2, 10, 40, 100];
+            var colors = chroma.scale(['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15']).colors(grades.length - 1);
 
-            div.innerHTML = '<h4>Seniors in a Food Desert</h4>';
+            div.innerHTML = '<h4># of seniors</h4>';
 
             for (var i = 0; i < grades.length - 1; i++) {
                 labels.push(
