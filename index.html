@@ -153,7 +153,7 @@
         info.update = function (props) {
             this._div.innerHTML = '<h4>Chicago Food Deserts</h4>' + (props ?
                 '<b>' + '</b><br />' +
-                'Low food access: ' + props.laseniors1 + ' people'
+                'Low food access: ' + Math.round(props.laseniors1) + ' people'
                 : 'Hover over a census tract');
         };
 
