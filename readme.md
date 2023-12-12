@@ -13,8 +13,9 @@ An interactive map illustrating the number of seniors per census tract in Chicag
 
 This interactive map provides insights into the distribution of seniors living in food deserts across different census tracts in Chicago. Additionally, it highlights the locations of grocery stores to facilitate a better understanding of the accessibility of food resources for seniors in the city.
 
-The inspiration for creating this map came after reading this article. [https://chicago.suntimes.com/2023/11/2/23882682/mayor-brandon-johnson-city-owned-grocery-south-west-low-food-access-grocery-desert]
+The inspiration for creating this map came after reading on article on the Chicago times regarding a problem with food deserts in the city, and how the local government plans to respond. 
 
+Article:[ Food Deserts Plague Chicago Neighborhoods. Could the city run it's own grocery stores to fill in the gaps](https://chicago.suntimes.com/2023/11/2/23882682/mayor-brandon-johnson-city-owned-grocery-south-west-low-food-access-grocery-desert)
 ## How to Use
 
 1. **Hover over a Census Tract:** Move your cursor over a census tract to view the number of seniors living in a food desert.
@@ -46,3 +47,5 @@ If you'd like to contribute to this project, please follow these steps:
 ## Contact
 
 For any inquiries or feedback, please contact [Jason Wright](wrightjd5@appstate.edu).
+
+
