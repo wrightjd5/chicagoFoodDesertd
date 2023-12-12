@@ -36,9 +36,9 @@ The shapefile containing the Chicago census tract boundaries was uploaded into A
 
 ## Data Sources
 
-- **Seniors in Food Deserts Data:** [Your Data Source]
-- **Census Tract Boundaries:** [Your Data Source]
-- **Grocery Store Data:** [Your Data Source]
+- **Seniors in Food Deserts Data:** [https://www.ers.usda.gov/data-products/food-access-research-atlas]
+- **Census Tract Boundaries:** [https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Census-Tracts-2010/5jrd-6zik]
+- **Grocery Store Data:** [https://data.cityofchicago.org/Health-Human-Services/Grocery-Store-Status-Map/rish-pa6g]
 
 ## Contributing
 
