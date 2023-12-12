@@ -1,6 +1,6 @@
 # Chicago Seniors in Food Deserts Map
 
-An interactive map illustrating the number of seniors per census tract in Chicago living in food deserts. The map also displays the locations of grocery stores in the region.
+An interactive map illustrating the number of seniors per census tract in Chicago living in a food desert. The map also displays the locations of grocery stores in the region.
 
 ## Table of Contents
 - [About](#about)
